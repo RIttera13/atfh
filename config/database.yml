@@ -1,0 +1,13 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  username:
+  password:
+
+development:
+  <<: *default
+  database: atfh_development
+
+test:
+  <<: *default
+  database: atfh_test
