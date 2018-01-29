@@ -1,1 +1,29 @@
-$("#mymodal").find(".modal-content").html("<%= j render(partial: 'jobs/show') %>");
+$("#mymodal").find(".modal-content").html("<%= j render(partial: 'jobs/show', locals: { job: @job, users: @users }) %>");
+$("#datetimepicker1").datetimepicker({
+  format: "MM/DD/YYYY h:mm A",
+  stepping: 15,
+});
+$("#datetimepicker2").datetimepicker({
+  format: "MM/DD/YYYY h:mm A",
+  stepping: 15,
+});
+
+setInterval(function(){
+  getTimeWorked();
+  console.log("Code Ran");
+}, 5000);
+
+
+function getTimeWorked() {
+  var startTime = $("#datetimepicker1").val();
+  var endTime = $("#datetimepicker2").val();
+
+  time = Date.parse(endTime) - Date.parse(startTime);
+
+  time = time / 1000;
+  time = time / 60;
+
+
+  $("#hours-worked").replaceWith(time.toString());
+
+};

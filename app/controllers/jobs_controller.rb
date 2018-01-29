@@ -13,11 +13,13 @@ class JobsController < ApplicationController
     ) or return
 
     @jobs = Job.all
+    @users = User.all
   end
 
   # GET /jobs/1
   def show
     @job = Job.find(params[:id])
+    @users = User.all
   end
 
   # GET /jobs/new
@@ -66,7 +68,7 @@ class JobsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:job_location, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes)
+      params.require(:job).permit(:job_location, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_accepted, :job_paid, :primary_id, :backup_id, :location_id)
     end
 
 end

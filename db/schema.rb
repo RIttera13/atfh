@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129082013) do
+ActiveRecord::Schema.define(version: 20180129064343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,20 @@ ActiveRecord::Schema.define(version: 20180129082013) do
     t.string "job_estimated_hours"
     t.string "job_sport"
     t.string "job_notes"
-    t.boolean "job_assigned", default: false
-    t.boolean "job_closed", default: false
+    t.string "job_completion_notes"
+    t.string "job_start_time"
+    t.string "job_end_time"
+    t.boolean "job_completed", default: false
+    t.boolean "job_accepted", default: false
+    t.boolean "job_paid", default: false
+    t.bigint "primary_id"
+    t.bigint "backup_id"
+    t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "location_id"
-    t.integer "user_id"
+    t.index ["backup_id"], name: "index_jobs_on_backup_id"
     t.index ["location_id"], name: "index_jobs_on_location_id"
-    t.index ["user_id"], name: "index_jobs_on_user_id"
+    t.index ["primary_id"], name: "index_jobs_on_primary_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -71,4 +77,5 @@ ActiveRecord::Schema.define(version: 20180129082013) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "jobs", "locations"
 end

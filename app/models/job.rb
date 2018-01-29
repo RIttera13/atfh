@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
   belongs_to :location
-  belongs_to :user, optional: true
+  belongs_to :primary, :class_name => 'User', optional: true
+  belongs_to :backup, :class_name => 'User', optional: true
 
   include PgSearch
 

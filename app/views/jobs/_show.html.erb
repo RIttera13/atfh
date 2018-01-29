@@ -1,6 +1,39 @@
-<div class="content-offset">
-  <div class="content">
-    <%= link_to 'Edit', edit_job_path(@job) %> |
+<div class="job-show">
+  <div class="job-show-content">
+    <p><span class="show-titles">Location: </span><span class="show-details"> <%= job.job_location %></span></p>
+    <p><span class="show-titles">Address: </span><span class="show-details"> <%= job.job_address %></span></p>
+    <p><span class="show-titles">Date: </span><span class="show-details"> <%= job.job_date %></span></p>
+    <p><span class="show-titles">Time: </span><span class="show-details"> <%= job.job_time %></span></p>
+    <p><span class="show-titles">Estimated Hours: </span><span class="show-details"> <%= job.job_estimated_hours %></span></p>
+    <p><span class="show-titles">Sport: </span><span class="show-details"> <%= job.job_sport %></span></p>
+    <p><span class="show-titles">Notes: </span><span class="show-details"> <%= job.job_notes %></span></p>
+
+    <% if current_user == users.find_by(id: job.primary_id) %>
+      <%= form_for @job do |f| %>
+        <div class="form-group">
+          <%= f.label :job_completion_notes, "Completion Notes:", style:"vertical-align: top" %>&nbsp;&nbsp;
+          <%= f.text_area :job_completion_notes %>
+        </div>
+        <div class="field">
+          <%= f.label :job_start_time, "Start Time:" %>&nbsp;&nbsp;
+          <%= f.text_field :job_start_time, class: "date datepicker", id: 'datetimepicker1' %>
+        </div>
+        </br>
+        <div class="field">
+          <%= f.label :job_end_time, "End Time:" %>&nbsp;&nbsp;
+          <%= f.text_field :job_end_time, class: "date datepicker", id: 'datetimepicker2' %>
+        </div>
+        <div class="field">
+          <%= f.hidden_field :job_completed, value: true %>
+        </div>
+        <div class="field">
+          <p><span>Hours Worked: </span><span id="hours-worked"></span></p>
+        </div>
+        <div class="actions">
+          <%= f.submit 'Submit Completed Job', class: "btn btn-success"%>
+        </div>
+      <% end %>
+    <% end %>
     <%= link_to 'Back', jobs_path %>
   </div>
 </div>

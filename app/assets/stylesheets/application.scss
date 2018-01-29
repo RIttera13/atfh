@@ -93,10 +93,46 @@ input {
   padding: 0px;
 }
 
+.user-name {
+  padding-top: 5px;
+  padding-left: 5px;
+  color: #00c5ff !important;
+}
+
+.sign-out {
+  padding-top: 5px;
+  padding-left: 5px;
+  color: #ffa2b3 !important;
+}
+
 .search-form {
   padding-top: 10px;
 }
 
 .reset-filter {
   padding-top: 3px !important;
+}
+
+.job-show {
+  background-color: antiquewhite;
+}
+
+.job-show-content {
+  padding: 15px 50px 15px 50px;
+}
+
+.show-titles{
+  font-size: 20px;
+  font-weight: bolder;
+}
+
+.show-details {
+  font-size: 18px;
+  font-weight: normal;
+  font-family: fantasy;
+}
+
+#job_job_completion_notes {
+  width: 50%;
+  height: 125px;
 }

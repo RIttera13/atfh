@@ -31,7 +31,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% jobs.where("job_assigned = ? AND job_closed = ?", false, false).each do |job| %>
+                <% jobs.where(primary_id: nil).where(job_completed: false).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
@@ -84,7 +84,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% jobs.where("job_assigned = ? AND job_closed = ?", true, false).each do |job| %>
+                <% jobs.where.not(primary_id: nil).where(job_completed: false).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
@@ -95,12 +95,22 @@
                         <td class="col col-md-auto">
                           <p class="text-center"><%= job.job_date %></p>
                         </td>
-                        <td class="col col-md-auto">
-                          <p class="text-center"><%= User.find_by(id: job.user_id).firstname %></p>
-                        </td>
-                        <td class="col col-md-auto">
-                          <p class="text-center">Bob</p>
-                        </td>
+                        <% @users.where(id: job.primary_id).each do |user| %>
+                          <td class="col col-md-auto">
+                            <p class="text-center"><%= user.firstname %> <%= user.lastname %></p>
+                          </td>
+                        <% end %>
+                        <% if job.backup_id? %>
+                          <% @users.where(id: job.backup_id).each do |user| %>
+                            <td class="col col-md-auto">
+                              <p class="text-center"><%= user.firstname %> <%= user.lastname %></p>
+                            </td>
+                          <% end %>
+                        <% else %>
+                          <td class="col col-md-auto">
+                            <p class="text-center">Unassigned</p>
+                          </td>
+                        <% end %>
                         <% if current_user.admin? %>
                           <td class="col col-md-auto">
                             <p class="text-center"><%= link_to "Edit", edit_job_path(job), {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success upgrade', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %></p>
@@ -136,7 +146,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% jobs.where(job_closed: true).each do |job| %>
+                <% jobs.where(job_completed: true).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
@@ -147,9 +157,11 @@
                         <td class="col col-md-auto">
                           <p class="text-center"><%= job.job_date %></p>
                         </td>
-                        <td class="col col-md-auto">
-                          <p class="text-center"><%= User.find_by(id: job.user_id).firstname %></p>
-                        </td>
+                        <% @users.where(id: job.primary_id).each do |user| %>
+                          <td class="col col-md-auto">
+                            <p class="text-center"><%= user.firstname %> <%= user.lastname %></p>
+                          </td>
+                        <% end %>
                         <% if current_user.admin? %>
                           <td class="col col-md-auto">
                             <p class="text-center"><%= link_to "Edit", edit_job_path(job), {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success upgrade', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %></p>
