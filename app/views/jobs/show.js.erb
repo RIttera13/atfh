@@ -1,4 +1,8 @@
 $("#mymodal").find(".modal-content").html("<%= j render(partial: 'jobs/show', locals: { job: @job, users: @users }) %>");
+
+var defaultDate = $("#job-date").val();
+var defaultTime = $("#job-time").val();
+
 $("#datetimepicker1").datetimepicker({
   format: "MM/DD/YYYY h:mm A",
   stepping: 15,

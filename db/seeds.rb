@@ -39,7 +39,7 @@ puts "#{Sport.count} Sports Created!"
   location.jobs.create!({
     job_location: location.location_name,
     job_address: location.location_address,
-    job_date: "1-10-2018",
+    job_date: "2-3-2018",
     job_time: "12:00:00",
     job_estimated_hours: 5,
     job_sport: Sport.all.sample.sport_name,

@@ -2,8 +2,8 @@
   <div class="job-show-content">
     <p><span class="show-titles">Location: </span><span class="show-details"> <%= job.job_location %></span></p>
     <p><span class="show-titles">Address: </span><span class="show-details"> <%= job.job_address %></span></p>
-    <p><span class="show-titles">Date: </span><span class="show-details"> <%= job.job_date %></span></p>
-    <p><span class="show-titles">Time: </span><span class="show-details"> <%= job.job_time %></span></p>
+    <p><span class="show-titles">Date: </span><span class="show-details" id="job-date"> <%= job.job_date %></span></p>
+    <p><span class="show-titles">Time: </span><span class="show-details" id="job-time"> <%= job.job_time %></span></p>
     <p><span class="show-titles">Estimated Hours: </span><span class="show-details"> <%= job.job_estimated_hours %></span></p>
     <p><span class="show-titles">Sport: </span><span class="show-details"> <%= job.job_sport %></span></p>
     <p><span class="show-titles">Notes: </span><span class="show-details"> <%= job.job_notes %></span></p>
@@ -16,7 +16,11 @@
         </div>
         <div class="field">
           <%= f.label :job_start_time, "Start Time:" %>&nbsp;&nbsp;
-          <%= f.text_field :job_start_time, class: "date datepicker", id: 'datetimepicker1' %>
+          <% if job.job_start_time? %>
+            <%= f.text_field :job_start_time, class: "date datepicker", id: 'datetimepicker1' %>
+          <% else %>
+            <%= f.text_field :job_start_time, value: "#{job.job_date} #{job.job_time}", class: "date datepicker", id: 'datetimepicker1' %>
+          <% end %>
         </div>
         </br>
         <div class="field">

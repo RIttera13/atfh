@@ -87,10 +87,18 @@ input {
 
 .content {
   margin-left: 30px;
+  padding-right: 10px;
 }
 
 .new-btn {
   padding: 0px;
+  color: white !important;
+}
+
+.new-btn:hover {
+  color: #fff !important;
+  background-color: #449d44 !important;
+  border-color: #398439 !important;
 }
 
 .user-name {
@@ -135,4 +143,58 @@ input {
 #job_job_completion_notes {
   width: 50%;
   height: 125px;
+}
+
+.dashboard-welcome {
+  background: linear-gradient(to right, rgb(0, 4, 40), rgb(0, 78, 146));
+  color: lightsteelblue;
+  text-shadow: 2px 1px #286090;
+  border-radius: 25px;
+  width: 100%;
+}
+
+.dahboard-rows {
+  padding-left: 5px;
+}
+
+.dashboard-jobs {
+  margin: 8px;
+  border: 2.5px solid grey;
+  border-radius: 15px;
+}
+
+.dashboard-jobs-title {
+  text-decoration: underline;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  margin-top: 5px;
+  font-weight: bolder;
+  background: linear-gradient(rgb(35, 37, 38), rgb(65, 67, 69));
+  color: yellowgreen;
+  border-radius: 14px;
+}
+
+.critical-dahboard-rows {
+  margin: 0px;
+}
+
+.critical-dashboard-jobs {
+  margin: 8px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border: 2.5px solid grey;
+  border-radius: 15px;
+}
+
+.critical-dashboard-jobs-title {
+  text-decoration: underline;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  margin-top: 5px;
+  font-weight: bolder;
+  background: linear-gradient(rgb(229, 45, 39), rgb(179, 18, 23));
+  color: white;
+  border-radius: 14px;
 }

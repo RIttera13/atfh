@@ -38,12 +38,14 @@ class JobsController < ApplicationController
 
   # POST /jobs
   def create
-    @job = Job.new(job_params)
+    job_location = Location.find_by(location_name: job_params[:job_location])
+    @job = job_location.jobs.new(job_params)
 
     if @job.save
-      redirect_to jobs_path, notice: 'Job was successfully created.'
+      redirect_to jobs_path, success: 'Job was successfully created.'
     else
-      render :new
+      flash[:error] = @job.errors.full_messages
+      redirect_to jobs_path
     end
   end
 
@@ -52,9 +54,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     if @job.update(job_params)
-      redirect_to jobs_path, notice: 'Job was successfully updated.'
+      redirect_to jobs_path, success: 'Job was successfully updated.'
     else
-      render :edit
+      flash[:error] = @job.errors.full_messages
+      redirect_to jobs_path
     end
   end
 
@@ -63,6 +66,17 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
     @job.destroy
     redirect_to jobs_path, notice: 'Job was successfully destroyed.'
+  end
+
+  def accept_job
+    @job = Job.find(params[:job])
+
+    if @job.update(primary_id: params[:current_user])
+      redirect_to root, success: 'You have accepted the Job.'
+    else
+      flash[:error] = @job.errors.full_messages
+      redirect_to root
+    end
   end
 
   private
