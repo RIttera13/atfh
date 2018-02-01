@@ -20,6 +20,7 @@ gem 'american_date'
 gem 'flipclockjs-rails'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'filterrific'
+gem 'will_paginate'
 gem 'pg_search'
 gem 'whenever', :require => false
 gem 'webshims-rails'

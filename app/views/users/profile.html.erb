@@ -1,0 +1,33 @@
+<div class="profile-container">
+  <h2 class= "profile-underline"><%= current_user.username %></h2>
+  <div class= "User-info">
+    <p>First Name: <%= current_user.firstname %></p>
+    <p>Last Name: <%= current_user.lastname %></p>
+    <p>Email: <%= current_user.email %></p>
+    <p>Address: <%= current_user.address %></p>
+    <p>Role: <%= current_user.role %></p>
+  </div>
+  <div class= 'profile-form pull-right'>
+    <h4 class= "profile-underline"> Change Password </h4>
+      <%= form_for current_user do |f| %>
+      <div class="field">
+        <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+        <%= f.password_field :password, autocomplete: "off" %>
+        <% if @minimum_password_length %>
+          <br />
+          <em><%= @minimum_password_length %> characters minimum</em>
+        <% end %>
+      </div>
+
+      <div class="field">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      </div>
+
+      <br>
+      <div class="actions">
+        <%= f.submit "Update" %>
+      </div>
+    <% end %>
+  </div>
+</div>

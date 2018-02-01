@@ -34,7 +34,7 @@ Sport.create!([
 
 puts "#{Sport.count} Sports Created!"
 
-100.times do
+30.times do
   location = Location.all.sample
   location.jobs.create!({
     job_location: location.location_name,

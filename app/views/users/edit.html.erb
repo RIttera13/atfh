@@ -1,0 +1,51 @@
+<div class="fix-inspection-position">
+  <div class="staffing-new">
+    <div class="container">
+      <h1 class="profile-underline">Edit User</h1>
+      </br>
+      <% if @user.id == current_user.id || current_user.admin? %>
+      <div class='edit-user'>
+        <div>
+          <%= form_for @user do |f| %>
+            <div class="form-group">
+              <%= f.label "First Name" %>:&nbsp;&nbsp;
+              <%= f.text_field :firstname, value: @user.firstname %>
+            </div>
+            <div class="form-group">
+              <%= f.label "Last name" %>:&nbsp;&nbsp;
+              <%= f.text_field :lastname, value: @user.lastname %>
+            </div>
+            <div class="form-group">
+              <%= f.label :address %>:&nbsp;&nbsp;
+              <%= f.text_area :address, value: @user.address %>
+            </div>
+            <div class="form-group">
+              <%= f.label :email %>:&nbsp;&nbsp;
+              <%= f.email_field :email, value: @user.email %>
+            </div>
+            <div>
+            <%= f.label "Password" %> <i>(leave blank if you don't want to change it)</i><br />
+            <%= f.password_field :password, autocomplete: "on" %>
+            <% if @minimum_password_length %>
+              <br />
+              <em><%= @minimum_password_length %> characters minimum</em>
+            <% end %>
+            </div>
+            <div class="field">
+              <%= f.label :password_confirmation %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
+            <% if current_user.admin? %>
+              <div class="form-group">
+                <%= f.label :role %>:</br>
+                <%= f.select :role, [["Trainer", "trainer"], ["Admin", "admin"], ["Inactive/Terminated", "inactive"]], :prompt => 'Select One' %>
+              </div>
+            <% end %>
+            <%= f.submit "Save", class: 'btn btn-success' %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

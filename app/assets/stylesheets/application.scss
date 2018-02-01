@@ -198,3 +198,57 @@ input {
   color: white;
   border-radius: 14px;
 }
+
+.backup-dashboard-jobs {
+  margin: 8px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border: 2.5px solid grey;
+  border-radius: 15px;
+}
+
+.backup-dashboard-jobs-title {
+  text-decoration: underline;
+  font-size: 15px;
+  padding-top: 5px;
+  padding-bottom: 7px;
+  margin-top: 5px;
+  font-weight: bolder;
+  background: linear-gradient(rgb(229, 45, 39), rgb(179, 18, 23));
+  color: white;
+  border-radius: 14px;
+}
+
+.staffing-list {
+  width: 90%;
+  left: 150px;
+}
+
+.buffer {
+  margin-left: 10px;
+}
+
+.staffing-position {
+  font-size: 30px;
+  margin-left: 200px;
+  position: absolute;
+}
+
+.staffing-list-font {
+  font-size: 15px;
+}
+
+.staffing-list-font-inactive{
+  font-size: 15px;
+  background-color: grey;
+}
+
+.staffing-list-header-font {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.user-delete {
+  margin-left: 9px;
+  margin-right: 15px;
+}

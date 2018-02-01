@@ -97,7 +97,7 @@
                   <% @open_jobs.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'class' => "job-modal", 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
@@ -109,7 +109,7 @@
                         <p class="text-center"><%= job.job_estimated_hours %></p>
                       </td>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to "Accept", job_accept_job_path(job: "#{job.id}", current_user: "#{current_user.id}"), method: :post, class: 'btn btn-success upgrade', data: { confirm: 'Are you sure you want to accept this Job?' } %></p>
+                        <p class="text-center"><%= link_to "Accept", job_accept_job_path(job), method: :post, class: 'btn btn-success upgrade', data: { confirm: 'Are you sure you want to accept this Job?' } %></p>
                       </td>
                     </tr>
                   <% end %>
@@ -152,6 +152,46 @@
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= link_to "Accept", job_accept_job_path(job, current_user), method: :post, class: 'btn btn-success upgrade', data: { confirm: 'Are you sure you want to accept this Job?' } %></p>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="row text-center critical-dahboard-rows">
+          <div class="backup-dashboard-jobs">
+            <p class="backup-dashboard-jobs-title">Backup Openings</p>
+            </br>
+            <div class="text-center scroll">
+              <table class="table table-fixed table-bordered">
+                <thead>
+                  <tr class='staffing-list-header-font text-center'>
+                    <th class="text-center">Location</th>
+                    <th class="text-center">Date/Time</th>
+                    <th class="text-center">Sport</th>
+                    <th class="text-center">Hours</th>
+                    <th class="text-center">Backup Job</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @backup_open.each do |job| %>
+                    <tr class='staffing-list-font'>
+                      <td class="col col-md-auto">
+                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                      </td>
+                      <td class="col col-md-auto">
+                        <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
+                      </td>
+                      <td class="col col-md-auto">
+                        <p class="text-center"><%= job.job_sport %></p>
+                      </td>
+                      <td class="col col-md-auto">
+                        <p class="text-center"><%= job.job_estimated_hours %></p>
+                      </td>
+                      <td class="col col-md-auto">
+                        <p class="text-center"><%= link_to "Backup", job_backup_job_path(job, current_user), method: :post, class: 'btn btn-warning upgrade', data: { confirm: 'Are you sure you want to be added as the backup for this Job?' } %></p>
                       </td>
                     </tr>
                   <% end %>

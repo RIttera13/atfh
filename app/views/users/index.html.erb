@@ -1,0 +1,39 @@
+<div class='staffing-list'>
+  <div class="navbar navbar-default">
+      <%= form_for_filterrific @filterrific do |f| %>
+      <ul class="nav navbar-nav search-form">
+        <%= link_to "New User", new_user_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
+      <li>
+        Role:
+        <%= f.select(
+          :with_role_of,
+          @filterrific.select_options[:with_role_of],
+          { include_blank: '- Any -' }
+        ) %>&nbsp;&nbsp;
+      </li>
+
+      <li>
+      Search
+      <%= f.text_field(
+        :search_by,
+        class: 'filterrific-periodically-observed'
+      ) %>
+      </li>
+
+      <li>
+      <%= link_to(
+        'Reset filters',
+        reset_filterrific_url,
+      ) %>
+      </li>
+      <%= render_filterrific_spinner %>
+    <% end %>
+  </ul>
+  </div>
+  <div>
+    <%= render(
+      partial: 'users/list',
+      locals: { users: @users }
+    ) %>
+ </div>
+</div>

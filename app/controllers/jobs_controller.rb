@@ -69,13 +69,24 @@ class JobsController < ApplicationController
   end
 
   def accept_job
-    @job = Job.find(params[:job])
+    @job = Job.find(params[:job_id])
 
-    if @job.update(primary_id: params[:current_user])
-      redirect_to root, success: 'You have accepted the Job.'
+    if @job.update(primary_id: current_user.id)
+      redirect_to root_path, success: 'You have accepted the Job.'
     else
       flash[:error] = @job.errors.full_messages
-      redirect_to root
+      redirect_to root_path
+    end
+  end
+
+  def backup_job
+    @job = Job.find(params[:job_id])
+
+    if @job.update(backup_id: current_user.id)
+      redirect_to root_path, success: 'You are the Backup for the Job.'
+    else
+      flash[:error] = @job.errors.full_messages
+      redirect_to root_path
     end
   end
 

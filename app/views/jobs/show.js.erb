@@ -12,22 +12,21 @@ $("#datetimepicker2").datetimepicker({
   stepping: 15,
 });
 
-setInterval(function(){
+var setBind = setInterval(function(){
   getTimeWorked();
-  console.log("Code Ran");
-}, 5000);
-
+}, 2000);
 
 function getTimeWorked() {
   var startTime = $("#datetimepicker1").val();
   var endTime = $("#datetimepicker2").val();
 
-  time = Date.parse(endTime) - Date.parse(startTime);
+  var time = Date.parse(endTime) - Date.parse(startTime);
 
-  time = time / 1000;
-  time = time / 60;
+  time = time / 1000; //seconds
+  time = time / 60; //Minutes
+  time = time / 60; //Hours
 
-
-  $("#hours-worked").replaceWith(time.toString());
-
+  if (time >= 0) {
+    $("#hours-worked").html(time.toString());
+  }
 };

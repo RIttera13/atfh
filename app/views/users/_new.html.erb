@@ -1,0 +1,47 @@
+<div class="modal-body text-center">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+  <div>
+    <h2 class="profile-underline">Add New User</h2>
+    <% if current_user.admin? %>
+      <%= form_for @user do |f| %>
+
+        <div class="field">
+          <%= f.label :email %>:<br />
+          <%= f.email_field :email, autofocus: true %>
+        </div>
+        <div class="field">
+          <%= f.label :firstname %>:<br />
+          <%= f.text_field :firstname %>
+        </div>
+        <div class="field">
+          <%= f.label :lastname %>:<br />
+          <%= f.text_field :lastname %>
+        </div>
+        <div class="field">
+          <%= f.label :address %>:<br />
+          <%= f.text_area :address%>
+        </div>
+        <div class="field">
+          <%= f.label :password %>:
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "off" %>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>:<br />
+          <%= f.password_field :password_confirmation, autocomplete: "off" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :role %>:</br>
+            <%= f.select :role, [["Trainer", "trainer"], ["Admin", "admin"]], :prompt => 'Select One' %>
+        </div>
+        <div class="actions">
+          <%= f.submit "Create Account" %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
