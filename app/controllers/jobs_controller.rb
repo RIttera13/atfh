@@ -7,13 +7,23 @@ class JobsController < ApplicationController
       Job,
       params[:filterrific],
       select_options: {
-        with_job_locations: Location.all.map(&:location_name),
-        with_job_sport: Sport.all.map(&:sport_name)
+        with_job_client_of: Client.all.map(&:client_name),
+        with_job_sport_of: Sport.all.map(&:sport_name)
       }
     ) or return
 
-    @jobs = Job.all
+    @jobs = @filterrific.find.page(params[:page])
     @users = User.all
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+
+    rescue ActiveRecord::RecordNotFound => e
+     puts "Had to reset filterrific params: #{ e.message }"
+     redirect_to(reset_filterrific_url(format: :html)) and return
+
   end
 
   # GET /jobs/1
@@ -26,20 +36,20 @@ class JobsController < ApplicationController
   def new
     @job = Job.new
     @sports = Sport.all
-    @locations = Location.all
+    @clients = Client.all
   end
 
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
     @sports = Sport.all
-    @locations = Location.all
+    @clients = Client.all
   end
 
   # POST /jobs
   def create
-    job_location = Location.find_by(location_name: job_params[:job_location])
-    @job = job_location.jobs.new(job_params)
+    job_client = Client.find_by(client_name: job_params[:job_client])
+    @job = job_client.jobs.new(job_params)
 
     if @job.save
       redirect_to jobs_path, success: 'Job was successfully created.'
@@ -93,7 +103,7 @@ class JobsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:job_location, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_accepted, :job_paid, :primary_id, :backup_id, :location_id)
+      params.require(:job).permit(:job_client, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_accepted, :job_paid, :primary_id, :backup_id, :client_id)
     end
 
 end

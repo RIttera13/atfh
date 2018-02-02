@@ -1,6 +1,6 @@
 <div class="job-show">
   <div class="job-show-content">
-    <p><span class="show-titles">Location: </span><span class="show-details"> <%= job.job_location %></span></p>
+    <p><span class="show-titles">Client: </span><span class="show-details"> <%= Client.find_by(id: job.client_id).client_name %></span></p>
     <p><span class="show-titles">Address: </span><span class="show-details"> <%= job.job_address %></span></p>
     <p><span class="show-titles">Date: </span><span class="show-details" id="job-date"> <%= job.job_date %></span></p>
     <p><span class="show-titles">Time: </span><span class="show-details" id="job-time"> <%= job.job_time %></span></p>

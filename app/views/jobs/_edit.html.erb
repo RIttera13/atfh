@@ -16,8 +16,8 @@
       </div>
     <% end %>
     <div class="form-group">
-      <%= f.label :job_location, "Location:" %>&nbsp;&nbsp;
-      <%= f.select :job_location, @locations.map(&:location_name), value: @job.job_location %>
+      <%= f.label :job_client, "Client:" %>&nbsp;&nbsp;
+      <%= f.select :job_client, @clients.map(&:client_name), value: @job.job_client %>
     </div>
     </br>
     <div class="field">

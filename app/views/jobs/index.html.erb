@@ -7,28 +7,28 @@
             <%= link_to "New Job", new_job_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
           </li>
           <li class="search-form">
-            Location:
+            Client:
             <%= f.select(
-              :with_job_locations,
-              @filterrific.select_options[:with_job_locations],
+              :with_job_client_of,
+              @filterrific.select_options[:with_job_client_of],
               { include_blank: '- Any -' }
             ) %>&nbsp;&nbsp;
           </li>
           <li class="search-form">
             Sport:
             <%= f.select(
-              :with_job_sport,
-              @filterrific.select_options[:with_job_sport],
+              :with_job_sport_of,
+              @filterrific.select_options[:with_job_sport_of],
               { include_blank: '- Any -' }
             ) %>&nbsp;&nbsp;
           </li>
           <li class="search-form">
             From:
-            <%= f.date_field(:with_date_of_gte, :value => 1.month.ago.strftime("%Y-%m-%d")) %>&nbsp;&nbsp;
+            <%= f.date_field(:with_job_date_gte) %>&nbsp;&nbsp;
           </li>
           <li class="search-form">
             To:
-            <%= f.date_field(:with_date_of_lt) %>&nbsp;&nbsp;
+            <%= f.date_field(:with_job_date_lt) %>&nbsp;&nbsp;
           </li>
 
           <li class="search-form">

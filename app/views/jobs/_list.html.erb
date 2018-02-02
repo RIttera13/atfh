@@ -19,7 +19,7 @@
             <table class="table table-fixed table-bordered">
               <thead>
                 <tr class='staffing-list-header-font text-center'>
-                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :location) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :client) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :sport) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :date) %></th>
                   <th class="text-center">Trainer</th>
@@ -34,13 +34,13 @@
                 <% jobs.where(primary_id: nil).where(job_completed: false).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                          <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                         </td>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= job.job_sport %></p>
                         </td>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= job.job_date %></p>
+                          <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
                         </td>
                         <td class="col col-md-auto">
                           <p class="text-center">Unassigned</p>
@@ -72,7 +72,7 @@
             <table class="table table-fixed table-bordered">
               <thead>
                 <tr class='staffing-list-header-font text-center'>
-                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :location) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :client) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :sport) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :date) %></th>
                   <th class="text-center">Trainer</th>
@@ -87,13 +87,13 @@
                 <% jobs.where.not(primary_id: nil).where(job_completed: false).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                          <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                         </td>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= job.job_sport %></p>
                         </td>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= job.job_date %></p>
+                          <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
                         </td>
                         <% @users.where(id: job.primary_id).each do |user| %>
                           <td class="col col-md-auto">
@@ -135,7 +135,7 @@
             <table class="table table-fixed table-bordered">
               <thead>
                 <tr class='staffing-list-header-font text-center'>
-                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :location) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :client) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :sport) %></th>
                   <th class="text-center"><%= filterrific_sorting_link(@filterrific, :date) %></th>
                   <th class="text-center">Trainer</th>
@@ -149,13 +149,13 @@
                 <% jobs.where(job_completed: true).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                          <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                         </td>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= job.job_sport %></p>
                         </td>
                         <td class="col col-md-auto">
-                          <p class="text-center"><%= job.job_date %></p>
+                          <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
                         </td>
                         <% @users.where(id: job.primary_id).each do |user| %>
                           <td class="col col-md-auto">

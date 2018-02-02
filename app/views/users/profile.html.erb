@@ -1,15 +1,35 @@
 <div class="profile-container">
-  <h2 class= "profile-underline"><%= current_user.username %></h2>
-  <div class= "User-info">
-    <p>First Name: <%= current_user.firstname %></p>
-    <p>Last Name: <%= current_user.lastname %></p>
-    <p>Email: <%= current_user.email %></p>
-    <p>Address: <%= current_user.address %></p>
-    <p>Role: <%= current_user.role %></p>
-  </div>
-  <div class= 'profile-form pull-right'>
-    <h4 class= "profile-underline"> Change Password </h4>
-      <%= form_for current_user do |f| %>
+  <h2 class= "profile-underline"><%= current_user.firstname %> <%= current_user.lastname %></h2>
+  <div class= 'profile-form pull-left'>
+    <%= form_for current_user do |f| %>
+      <div class="field">
+        <%= f.label :firstname, "First Name" %>:</br>
+        <%= f.text_field :firstname, value: current_user.firstname %>
+      </div>
+      <div class="field">
+        <%= f.label :lastname, "Last Name" %>:</br>
+        <%= f.text_field :lastname, value: current_user.lastname %>
+      </div>
+      <div class="field">
+        <%= f.label :phone_number, "Phone Number" %>:</br>
+        <%= f.telephone_field :phone_number, value: current_user.phone_number %>
+      </div>
+      <div class="field">
+        <%= f.label :email, "Email" %>:</br>
+        <%= f.email_field :email, value: current_user.email %>
+      </div>
+      <div class="field">
+        <%= f.label :address, "Address" %>:</br>
+        <%= f.text_area :address, value: current_user.address %>
+      </div>
+      <% if current_user.admin? %>
+        <div class="field">
+          <%= f.label :role, "Role" %>:</br>
+          <%= f.select :role, [["Trainer", "trainer"], ["Admin", "admin"]], value: current_user.role %>
+        </div>
+      <% end %>
+      </br>
+      <h4 class= "profile-underline"> Change Password </h4>
       <div class="field">
         <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
         <%= f.password_field :password, autocomplete: "off" %>

@@ -1,4 +1,4 @@
-<div class="fix-inspection-position">
+<div class="staffing-container">
   <div class="staffing-new">
     <div class="container">
       <h1 class="profile-underline">Edit User</h1>
@@ -8,21 +8,26 @@
         <div>
           <%= form_for @user do |f| %>
             <div class="form-group">
-              <%= f.label "First Name" %>:&nbsp;&nbsp;
+              <%= f.label "First Name" %>:&nbsp;&nbsp;</br>
               <%= f.text_field :firstname, value: @user.firstname %>
             </div>
             <div class="form-group">
-              <%= f.label "Last name" %>:&nbsp;&nbsp;
+              <%= f.label "Last name" %>:&nbsp;&nbsp;</br>
               <%= f.text_field :lastname, value: @user.lastname %>
             </div>
             <div class="form-group">
-              <%= f.label :address %>:&nbsp;&nbsp;
+              <%= f.label :address %>:&nbsp;&nbsp;</br>
               <%= f.text_area :address, value: @user.address %>
             </div>
-            <div class="form-group">
-              <%= f.label :email %>:&nbsp;&nbsp;
+            <div class="field">
+              <%= f.label :phone_number, "Phone Number" %>:&nbsp;&nbsp;</br>
+              <%= f.telephone_field :phone_number, value: @user.phone_number %>
+            </div>
+            <div class="field">
+              <%= f.label :email %>:<br />
               <%= f.email_field :email, value: @user.email %>
             </div>
+            </br>
             <div>
             <%= f.label "Password" %> <i>(leave blank if you don't want to change it)</i><br />
             <%= f.password_field :password, autocomplete: "on" %>

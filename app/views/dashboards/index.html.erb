@@ -14,7 +14,7 @@
               <table class="table table-fixed table-bordered">
                 <thead>
                   <tr class='staffing-list-header-font text-center'>
-                    <th class="text-center">Location</th>
+                    <th class="text-center">Client</th>
                     <th class="text-center">Date/Time</th>
                     <th class="text-center">Sport</th>
                     <th class="text-center">Hours</th>
@@ -24,7 +24,7 @@
                   <% @user_primary_jobs.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
@@ -50,7 +50,7 @@
               <table class="table table-fixed table-bordered">
                 <thead>
                   <tr class='staffing-list-header-font text-center'>
-                    <th class="text-center">Location</th>
+                    <th class="text-center">Client</th>
                     <th class="text-center">Date/Time</th>
                     <th class="text-center">Sport</th>
                     <th class="text-center">Hours</th>
@@ -60,7 +60,7 @@
                   <% @user_backup_jobs.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
@@ -86,7 +86,7 @@
               <table class="table table-fixed table-bordered">
                 <thead>
                   <tr class='staffing-list-header-font text-center'>
-                    <th class="text-center">Location</th>
+                    <th class="text-center">Client</th>
                     <th class="text-center">Date/Time</th>
                     <th class="text-center">Sport</th>
                     <th class="text-center">Hours</th>
@@ -97,7 +97,7 @@
                   <% @open_jobs.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'class' => "job-modal", 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'class' => "job-modal", 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
@@ -128,7 +128,7 @@
               <table class="table table-fixed table-bordered">
                 <thead>
                   <tr class='staffing-list-header-font text-center'>
-                    <th class="text-center">Location</th>
+                    <th class="text-center">Client</th>
                     <th class="text-center">Date/Time</th>
                     <th class="text-center">Sport</th>
                     <th class="text-center">Hours</th>
@@ -139,7 +139,7 @@
                   <% @critical_open.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
@@ -168,7 +168,7 @@
               <table class="table table-fixed table-bordered">
                 <thead>
                   <tr class='staffing-list-header-font text-center'>
-                    <th class="text-center">Location</th>
+                    <th class="text-center">Client</th>
                     <th class="text-center">Date/Time</th>
                     <th class="text-center">Sport</th>
                     <th class="text-center">Hours</th>
@@ -179,7 +179,7 @@
                   <% @backup_open.each do |job| %>
                     <tr class='staffing-list-font'>
                       <td class="col col-md-auto">
-                        <p class="text-center"><%= link_to(job.job_location, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
                       </td>
                       <td class="col col-md-auto">
                         <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>

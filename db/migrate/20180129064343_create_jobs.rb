@@ -1,7 +1,7 @@
 class CreateJobs < ActiveRecord::Migration[5.1]
   def change
     create_table :jobs do |t|
-      t.string :job_location
+      t.string :job_client
       t.string :job_address
       t.string :job_date
       t.string :job_time
@@ -16,7 +16,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.boolean :job_paid, default: false
       t.references :primary
       t.references :backup
-      t.references :location, foreign_key: true
+      t.references :client, foreign_key: true
 
       t.timestamps
     end

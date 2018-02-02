@@ -9,6 +9,7 @@
             <th class="text-center"><%= filterrific_sorting_link(@filterrific, :lastname) %></th>
             <th class="text-center"><%= filterrific_sorting_link(@filterrific, :role) %></th>
             <th class="text-center"><%= filterrific_sorting_link(@filterrific, :email) %></th>
+            <th class="text-center">Phone Number</th>
             <th class="text-center">Edit User</th>
             <th class="text-center">De-Activate User</th>
           </tr>
@@ -31,6 +32,9 @@
               </td>
               <td class="col col-md-auto">
                 <p class="text-center"><%= user.email %></p>
+              </td>
+              <td class="col col-md-auto">
+                <p class="text-center"><%= user.phone_number %></p>
               </td>
               <td class="col col-md-auto">
                 <p class="text-center"><%= link_to "Edit", edit_user_path(user), class: 'btn btn-success upgrade' %></p>

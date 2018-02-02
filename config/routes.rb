@@ -8,7 +8,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   devise_for :user
-  resources :users, only: [:new, :show, :index, :edit, :update, :profile, :destroy]
+  resources :users, only: [:new, :create, :show, :index, :edit, :update, :profile, :destroy, :metrics]
+
+  get 'profile' => 'users#profile'
+  get 'metrics' => 'users#metrics'
 
   authenticated :user do
     root to: "dashboards#index", as: :authenticated_root
