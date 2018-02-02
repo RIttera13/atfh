@@ -2,9 +2,39 @@
   <div class="content">
     <div class="text-center scroll staffing-content">
       <table class="table table-fixed table-bordered">
+        <caption>Pending Hours </caption>
+        <% if @pending_job_total_hours.empty? %>
+            <tr class='staffing-list-header-font text-center'>
+              <th class="text-center">There are no pending jobs</th>
+            </tr>
+          </table>
+        <% else %>
+          <thead>
+            <tr class='staffing-list-header-font text-center'>
+              <th class="text-center">Month</th>
+              <th class="text-center">Hours Worked</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @completed_job_total_hours.each do |month, hours| %>
+              <tr>
+                <td class="col col-md-auto">
+                  <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
+                </td>
+                <td class="col col-md-auto">
+                  <p class="text-center"><%= hours %></p>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+      <table class="table table-fixed table-bordered">
         <caption>Completed Hours - Not Yet Approved </caption>
         <% if @completed_job_total_hours.empty? %>
-            <p> There are no jobs pending approval <p>
+            <tr class='staffing-list-header-font text-center'>
+              <th class="text-center">There are no jobs pending approval</th>
+            </tr>
           </table>
         <% else %>
           <thead>

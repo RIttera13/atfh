@@ -13,7 +13,7 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :job_end_time
       t.integer :job_actual_hours, default: 0
       t.boolean :job_completed, default: false
-      t.boolean :job_accepted, default: false
+      t.boolean :job_approved, default: false
       t.boolean :job_paid, default: false
       t.references :primary
       t.references :backup

@@ -7,8 +7,24 @@
     <p><span class="show-titles">Estimated Hours: </span><span class="show-details"> <%= job.job_estimated_hours %></span></p>
     <p><span class="show-titles">Sport: </span><span class="show-details"> <%= job.job_sport %></span></p>
     <p><span class="show-titles">Notes: </span><span class="show-details"> <%= job.job_notes %></span></p>
-
-    <% if current_user == users.find_by(id: job.primary_id) %>
+    <% if current_user.admin? && job.job_completed? %>
+      </br>
+      </br>
+      <p><span class="show-titles">Start Time: </span><span class="show-details" id="job-time"> <%= job.job_start_time %></span></p>
+      <p><span class="show-titles">Completed Time: </span><span class="show-details"> <%= job.job_end_time %></span></p>
+      <p><span class="show-titles">Actual Job Hours: </span><span class="show-details"> <%= job.job_actual_hours %></span></p>
+      <p><span class="show-titles">Completion Notes: </span><span class="show-details"> <%= job.job_completion_notes %></span></p>
+      <%= form_for @job do |f| %>
+        <% if job.job_completed? %>
+          <div class="field">
+            <%= f.hidden_field :job_approved, value: true %>
+          </div>
+          <div class="actions">
+            <%= f.submit 'Approve Completed Job', class: "btn btn-success"%>
+          </div>
+        <% end %>
+      <% end %>
+    <% elsif current_user == users.find_by(id: job.primary_id) %>
       <%= form_for @job do |f| %>
         <div class="form-group">
           <%= f.label :job_completion_notes, "Completion Notes:", style:"vertical-align: top" %>&nbsp;&nbsp;
@@ -24,17 +40,17 @@
         </div>
         </br>
         <div class="field">
-          <%= f.label :job_end_time, "End Time:" %>&nbsp;&nbsp;
+          <%= f.label :job_end_time, "Completed Time:" %>&nbsp;&nbsp;
           <%= f.text_field :job_end_time, class: "date datepicker", id: 'datetimepicker2' %>
-        </div>
-        <div class="field">
-          <%= f.hidden_field :job_completed, value: true %>
         </div>
         <div class="field">
           <%= f.label :job_actual_hours, "Hours Worked:" %>&nbsp;&nbsp;
           <%= f.number_field :job_actual_hours, id: "hours-worked", :readonly => true, min: 0 %>
         </div>
         <div class="field">
+        </div>
+        <div class="field">
+          <%= f.hidden_field :job_completed, value: true %>
         </div>
         <div class="actions">
           <%= f.submit 'Submit Completed Job', class: "btn btn-success"%>

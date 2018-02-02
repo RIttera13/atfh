@@ -84,10 +84,9 @@ class UsersController < ApplicationController
   def metrics
     @user = current_user
 
-    @completed_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_accepted: false).group_by{ |j| j.job_date.to_date.month})
-    @accepted_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_accepted: true).group_by{ |j| j.job_date.to_date.month})
-
-    binding.pry
+    @pending_job_total_hours = FigureHours.call(@user.primary.where(job_completed: false).where(job_approved: false).group_by{ |j| j.job_date.to_date.month})
+    @completed_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: false).group_by{ |j| j.job_date.to_date.month})
+    @accepted_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: true).group_by{ |j| j.job_date.to_date.month})
   end
 
   private

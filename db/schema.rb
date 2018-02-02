@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20180129064343) do
     t.string "job_end_time"
     t.integer "job_actual_hours", default: 0
     t.boolean "job_completed", default: false
-    t.boolean "job_accepted", default: false
+    t.boolean "job_approved", default: false
     t.boolean "job_paid", default: false
     t.bigint "primary_id"
     t.bigint "backup_id"

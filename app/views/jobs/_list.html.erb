@@ -9,7 +9,10 @@
           <a href="#2" data-toggle="tab">Assigned Jobs</a>
     		</li>
         <li>
-          <a href="#3" data-toggle="tab">Closed Jobs</a>
+          <a href="#3" data-toggle="tab">Completed Jobs</a>
+        </li>
+        <li>
+          <a href="#4" data-toggle="tab">Approved Jobs</a>
         </li>
       </ul>
 			<div class="tab-content">
@@ -146,7 +149,58 @@
                 </tr>
               </thead>
               <tbody>
-                <% jobs.where(job_completed: true).each do |job| %>
+                <% jobs.where(job_completed: true).where(job_approved: false).each do |job| %>
+                      <tr class='staffing-list-font'>
+                        <td class="col col-md-auto">
+                          <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
+                        </td>
+                        <td class="col col-md-auto">
+                          <p class="text-center"><%= job.job_sport %></p>
+                        </td>
+                        <td class="col col-md-auto">
+                          <p class="text-center"><%= job.job_date %> <%= job.job_time %></p>
+                        </td>
+                        <% @users.where(id: job.primary_id).each do |user| %>
+                          <td class="col col-md-auto">
+                            <p class="text-center"><%= user.firstname %> <%= user.lastname %></p>
+                          </td>
+                        <% end %>
+                        <% if current_user.admin? %>
+                          <td class="col col-md-auto">
+                            <p class="text-center"><%= link_to "Edit", edit_job_path(job), {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success upgrade', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %></p>
+                          </td>
+                          <td class="col col-md-auto">
+                            <p class="text-center"><%= link_to "Delete", job_path(job), method: :delete, class: 'btn btn-danger user-delete', data: { confirm: 'Are you sure you want to delete this Job?' } %></p>
+                          </td>
+                        <% end %>
+                      </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+          <span class="download-links">
+            Download:
+            <%= link_to "CSV", jobs_path(format: "csv") %> |
+            <%= link_to "Excel", jobs_path(format: "xls") %>
+          </span>
+        </div>
+        <div class="tab-pane" id="4">
+          <div class="text-center scroll staffing-content">
+            <table class="table table-fixed table-bordered">
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :client) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :sport) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :date) %></th>
+                  <th class="text-center">Trainer</th>
+                  <% if current_user.admin? %>
+                    <th class="text-center">Edit</th>
+                    <th class="text-center">Delete</th>
+                  <% end %>
+                </tr>
+              </thead>
+              <tbody>
+                <% jobs.where(job_completed: true).where(job_approved: true).each do |job| %>
                       <tr class='staffing-list-font'>
                         <td class="col col-md-auto">
                           <p class="text-center"><%= link_to(job.job_client, job_path(job),{:remote => true, 'data-toggle' =>  "modal", 'data-target' => '#mymodal'}) %></p>
