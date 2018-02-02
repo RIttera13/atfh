@@ -7,8 +7,8 @@ class User < ApplicationRecord
 
 
 
-  has_many :primary_jobs, :class_name => 'Job', :foreign_key => 'primary_id'
-  has_many :backup_jobs, :class_name => 'Job', :foreign_key => 'backup_id'
+  has_many :primary, :class_name => 'Job', :foreign_key => 'primary_id'
+  has_many :backup, :class_name => 'Job', :foreign_key => 'backup_id'
 
   validates :password,
     :length => { :minimum => 6, :allow_nil => true },

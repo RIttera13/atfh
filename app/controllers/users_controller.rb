@@ -82,23 +82,12 @@ class UsersController < ApplicationController
   end
 
   def metrics
-    @filterrific = initialize_filterrific(
-    User,
-    params[:filterrific],
-    select_options: {
-        with_role_of: ["trainer", "inactive", "admin"]
-      }
-    ) or return
+    @user = current_user
 
-    @users = @filterrific.find.page(params[:page])
+    @completed_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_accepted: false).group_by{ |j| j.job_date.to_date.month})
+    @accepted_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_accepted: true).group_by{ |j| j.job_date.to_date.month})
 
-    respond_to do |format|
-      format.html
-      format.js
-    end
-    rescue ActiveRecord::RecordNotFound => e
-     puts "Had to reset filterrific params: #{ e.message }"
-     redirect_to(reset_filterrific_url(format: :html)) and return
+    binding.pry
   end
 
   private

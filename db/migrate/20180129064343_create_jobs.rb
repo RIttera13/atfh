@@ -5,12 +5,13 @@ class CreateJobs < ActiveRecord::Migration[5.1]
       t.string :job_address
       t.string :job_date
       t.string :job_time
-      t.string :job_estimated_hours
+      t.integer :job_estimated_hours
       t.string :job_sport
       t.string :job_notes
       t.string :job_completion_notes
       t.string :job_start_time
       t.string :job_end_time
+      t.integer :job_actual_hours, default: 0
       t.boolean :job_completed, default: false
       t.boolean :job_accepted, default: false
       t.boolean :job_paid, default: false

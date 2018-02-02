@@ -31,7 +31,10 @@
           <%= f.hidden_field :job_completed, value: true %>
         </div>
         <div class="field">
-          <p><span>Hours Worked: </span><span id="hours-worked"></span></p>
+          <%= f.label :job_actual_hours, "Hours Worked:" %>&nbsp;&nbsp;
+          <%= f.number_field :job_actual_hours, id: "hours-worked", :readonly => true, min: 0 %>
+        </div>
+        <div class="field">
         </div>
         <div class="actions">
           <%= f.submit 'Submit Completed Job', class: "btn btn-success"%>

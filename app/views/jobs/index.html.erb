@@ -2,7 +2,7 @@
   <div class="content">
     <div class="navbar navbar-default">
       <%= form_for_filterrific @filterrific do |f| %>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav job-nav">
           <li>
             <%= link_to "New Job", new_job_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
           </li>

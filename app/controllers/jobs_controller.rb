@@ -64,10 +64,10 @@ class JobsController < ApplicationController
     @job = Job.find(params[:id])
 
     if @job.update(job_params)
-      redirect_to jobs_path, success: 'Job was successfully updated.'
+      redirect_back(fallback_location: root_path), success: 'Job was successfully updated.'
     else
       flash[:error] = @job.errors.full_messages
-      redirect_to jobs_path
+      redirect_back(fallback_location: root_path)
     end
   end
 
@@ -103,7 +103,7 @@ class JobsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:job_client, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_accepted, :job_paid, :primary_id, :backup_id, :client_id)
+      params.require(:job).permit(:job_client, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_actual_hours, :job_accepted, :job_paid, :primary_id, :backup_id, :client_id)
     end
 
 end

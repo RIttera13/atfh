@@ -27,6 +27,6 @@ function getTimeWorked() {
   time = time / 60; //Hours
 
   if (time >= 0) {
-    $("#hours-worked").html(time.toString());
+    $("input#hours-worked").val(time.toString());
   }
 };
