@@ -11,7 +11,7 @@ class DashboardsController < ApplicationController
     @backup_open = @not_completed_job.where.not(primary_id: nil).where.not(primary_id: current_user.id).where(backup_id: nil)
     @critical_open = []
     @open_jobs.each do |job|
-      if job.job_date.to_date < 7.days.from_now
+      if job.job_date < 7.days.from_now
         @critical_open.push(job)
       end
     end

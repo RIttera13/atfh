@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
 
   def index
     @filterrific = initialize_filterrific(
@@ -84,9 +85,23 @@ class UsersController < ApplicationController
   def metrics
     @user = current_user
 
-    @pending_job_total_hours = FigureHours.call(@user.primary.where(job_completed: false).where(job_approved: false).group_by{ |j| j.job_date.to_date.month})
-    @completed_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: false).group_by{ |j| j.job_date.to_date.month})
-    @accepted_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: true).group_by{ |j| j.job_date.to_date.month})
+    @pending_job_total_hours = FigureHours.call(@user.primary.where(job_completed: false).where(job_approved: false).group_by{ |j| j.job_date.month}).sort
+    @completed_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: false).group_by{ |j| j.job_date.month}).sort.reverse
+    @accepted_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: true).where("EXTRACT(YEAR FROM job_date) = ?", Date.current.year).group_by{ |j| j.job_date.month}).sort.reverse
+    @last_year_job_total_hours = FigureHours.call(@user.primary.where(job_completed: true).where(job_approved: true).where("EXTRACT(YEAR FROM job_date) = ?", Date.current.year-1).group_by{ |j| j.job_date.month}).sort.reverse
+
+    unless @pending_job_total_hours.empty?
+      @total_hours_pending = @pending_job_total_hours [0].inject(&:+)
+    end
+    unless @completed_job_total_hours.empty?
+      @total_hours_completed = @completed_job_total_hours[0].inject(&:+)
+    end
+    unless @accepted_job_total_hours.empty?
+      @total_hours_accepted = @accepted_job_total_hours[0].inject(&:+)
+    end
+    unless @last_year_job_total_hours.empty?
+      @total_hours_last_year = @last_year_job_total_hours[0].inject(&:+)
+    end
   end
 
   private

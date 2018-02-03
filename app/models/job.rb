@@ -1,7 +1,7 @@
 class Job < ApplicationRecord
   include PgSearch
 
-  belongs_to :client
+  belongs_to :organization
   belongs_to :primary, :class_name => 'User', optional: true
   belongs_to :backup, :class_name => 'User', optional: true
 
@@ -18,15 +18,15 @@ class Job < ApplicationRecord
     default_filter_params: { sorted_by: 'job_date_desc' },
     available_filters: [
       :sorted_by,
-      :with_job_client_of,
+      :with_job_organization_of,
       :with_job_sport_of,
       :with_job_date_gte,
       :with_job_date_lt
     ]
   )
 
-  scope :with_job_client_of, lambda { |clients|
-    where(job_client: [*clients])
+  scope :with_job_organization_of, lambda { |organizations|
+    where(job_organization: [*organizations])
   }
 
   scope :with_job_sport_of, lambda { |sports|
@@ -53,9 +53,9 @@ class Job < ApplicationRecord
       when /^job_sport_/
         # Simple sort on the name colums
         order("jobs.job_sport #{ direction }")
-      when /^job_client_/
+      when /^job_organization_/
         # Simple sort on the name colums
-        order("jobs.job_client #{ direction }")
+        order("jobs.job_organization #{ direction }")
     else
       raise(ArgumentError, "Invalid sort option: #{ sort_option.inspect }")
     end

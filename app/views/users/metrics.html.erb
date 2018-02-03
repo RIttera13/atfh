@@ -1,90 +1,168 @@
 <div class="content-offset">
   <div class="content">
-    <div class="text-center scroll staffing-content">
-      <table class="table table-fixed table-bordered">
-        <caption>Pending Hours </caption>
-        <% if @pending_job_total_hours.empty? %>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">There are no pending jobs</th>
-            </tr>
-          </table>
-        <% else %>
-          <thead>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">Month</th>
-              <th class="text-center">Hours Worked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @completed_job_total_hours.each do |month, hours| %>
-              <tr>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
-                </td>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= hours %></p>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <table class="table table-fixed table-bordered">
-        <caption>Completed Hours - Not Yet Approved </caption>
-        <% if @completed_job_total_hours.empty? %>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">There are no jobs pending approval</th>
-            </tr>
-          </table>
-        <% else %>
-          <thead>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">Month</th>
-              <th class="text-center">Hours Worked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @completed_job_total_hours.each do |month, hours| %>
-              <tr>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
-                </td>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= hours %></p>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
-      <table class="table table-fixed table-bordered">
-        <caption>Approved Hours</caption>
-        <% if @accepted_job_total_hours.empty? %>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">No Approved Hours</th>
-            </tr>
-          </table>
-        <% else %>
-          <thead>
-            <tr class='staffing-list-header-font text-center'>
-              <th class="text-center">Month</th>
-              <th class="text-center">Hours Worked</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @accepted_job_total_hours.each do |month, hours| %>
-              <tr>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
-                </td>
-                <td class="col col-md-auto">
-                  <p class="text-center"><%= hours %></p>
-                </td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      <% end %>
+    <div class="row text-center metrics-rows">
+      <div class="col-md-6 metrics-jobs">
+        <div class="text-center scroll staffing-content">
+          <table class="table table-fixed table-bordered">
+            <caption>Pending Hours </caption>
+            <% if @pending_job_total_hours.empty? %>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">There are no pending jobs</th>
+                </tr>
+              </table>
+            <% else %>
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">Month</th>
+                  <th class="text-center">Hours Worked</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @completed_job_total_hours.each do |month, hours| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= hours %></p>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center">TOTAL</p>
+                  </td>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center"><%= @total_hours_pending %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 metrics-jobs">
+        <div class="text-center scroll staffing-content">
+          <table class="table table-fixed table-bordered">
+            <caption>Completed Hours - Not Yet Approved </caption>
+            <% if @completed_job_total_hours.empty? %>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">There are no jobs pending approval</th>
+                </tr>
+              </table>
+            <% else %>
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">Month</th>
+                  <th class="text-center">Hours Worked</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @completed_job_total_hours.each do |month, hours| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= hours %></p>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center">TOTAL</p>
+                  </td>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center"><%= @total_hours_completed %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row text-center metrics-rows">
+      <div class="col-md-6 metrics-jobs">
+        <div class="text-center scroll staffing-content">
+          <table class="table table-fixed table-bordered">
+            <caption>Approved Hours</caption>
+            <% if @accepted_job_total_hours.empty? %>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">No Approved Hours</th>
+                </tr>
+              </table>
+            <% else %>
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">Month</th>
+                  <th class="text-center">Hours Worked</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @accepted_job_total_hours.each do |month, hours| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= hours %></p>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center">TOTAL</p>
+                  </td>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center"><%= @total_hours_accepted %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
+      <div class="col-md-6 metrics-jobs">
+        <div class="text-center scroll staffing-content">
+          <table class="table table-fixed table-bordered">
+            <caption>Last Years Hours</caption>
+            <% if @last_year_job_total_hours.empty? %>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">No Approved Hours</th>
+                </tr>
+              </table>
+            <% else %>
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center">Month</th>
+                  <th class="text-center">Hours Worked</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @last_year_job_total_hours.each do |month, hours| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= Date::MONTHNAMES[month] %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= hours %></p>
+                    </td>
+                  </tr>
+                <% end %>
+                <tr>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center">TOTAL</p>
+                  </td>
+                  <td class="col col-md-auto total-hours">
+                    <p class="text-center"><%= @total_hours_last_year %></p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,8 +1,8 @@
 <div class="job-show">
   <div class="job-show-content">
-    <p><span class="show-titles">Client: </span><span class="show-details"> <%= Client.find_by(id: job.client_id).client_name %></span></p>
+    <p><span class="show-titles">Organization: </span><span class="show-details"> <%= Organization.find_by(id: job.organization_id).organization_name %></span></p>
     <p><span class="show-titles">Address: </span><span class="show-details"> <%= job.job_address %></span></p>
-    <p><span class="show-titles">Date: </span><span class="show-details" id="job-date"> <%= job.job_date %></span></p>
+    <p><span class="show-titles">Date: </span><span class="show-details" id="job-date"> <%= job.job_date.strftime("%m/%d/%Y") %></span></p>
     <p><span class="show-titles">Time: </span><span class="show-details" id="job-time"> <%= job.job_time %></span></p>
     <p><span class="show-titles">Estimated Hours: </span><span class="show-details"> <%= job.job_estimated_hours %></span></p>
     <p><span class="show-titles">Sport: </span><span class="show-details"> <%= job.job_sport %></span></p>
@@ -10,8 +10,8 @@
     <% if current_user.admin? && job.job_completed? %>
       </br>
       </br>
-      <p><span class="show-titles">Start Time: </span><span class="show-details" id="job-time"> <%= job.job_start_time %></span></p>
-      <p><span class="show-titles">Completed Time: </span><span class="show-details"> <%= job.job_end_time %></span></p>
+      <p><span class="show-titles">Start Time: </span><span class="show-details" id="job-time"> <%= job.job_start_time.strftime("%m/%d/%Y %H:%M %P") %></span></p>
+      <p><span class="show-titles">Completed Time: </span><span class="show-details"> <%= job.job_end_time.strftime("%m/%d/%Y %H:%M %P") %></span></p>
       <p><span class="show-titles">Actual Job Hours: </span><span class="show-details"> <%= job.job_actual_hours %></span></p>
       <p><span class="show-titles">Completion Notes: </span><span class="show-details"> <%= job.job_completion_notes %></span></p>
       <%= form_for @job do |f| %>
@@ -35,7 +35,7 @@
           <% if job.job_start_time? %>
             <%= f.text_field :job_start_time, class: "date datepicker", id: 'datetimepicker1' %>
           <% else %>
-            <%= f.text_field :job_start_time, value: "#{job.job_date} #{job.job_time}", class: "date datepicker", id: 'datetimepicker1' %>
+            <%= f.text_field :job_start_time, value: @start_date_time_auto, class: "date datepicker", id: 'datetimepicker1' %>
           <% end %>
         </div>
         </br>

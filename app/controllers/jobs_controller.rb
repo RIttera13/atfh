@@ -7,7 +7,7 @@ class JobsController < ApplicationController
       Job,
       params[:filterrific],
       select_options: {
-        with_job_client_of: Client.all.map(&:client_name),
+        with_job_organization_of: Organization.all.map(&:organization_name),
         with_job_sport_of: Sport.all.map(&:sport_name)
       }
     ) or return
@@ -30,26 +30,27 @@ class JobsController < ApplicationController
   def show
     @job = Job.find(params[:id])
     @users = User.all
+    @start_date_time_auto = DateTime.new(@job.job_date.year, @job.job_date.month, @job.job_date.day, @job.job_time.to_time.hour, @job.job_time.to_time.min, @job.job_time.to_time.sec).strftime("%m/%d/%Y %l:%M %P")
   end
 
   # GET /jobs/new
   def new
     @job = Job.new
     @sports = Sport.all
-    @clients = Client.all
+    @organizations = Organization.all
   end
 
   # GET /jobs/1/edit
   def edit
     @job = Job.find(params[:id])
     @sports = Sport.all
-    @clients = Client.all
+    @organizations = Organization.all
   end
 
   # POST /jobs
   def create
-    job_client = Client.find_by(client_name: job_params[:job_client])
-    @job = job_client.jobs.new(job_params)
+    job_organization = Organization.find_by(organization_name: job_params[:job_organization])
+    @job = job_organization.jobs.new(job_params)
 
     if @job.save
       redirect_to jobs_path, success: 'Job was successfully created.'
@@ -103,7 +104,7 @@ class JobsController < ApplicationController
   private
     # Only allow a trusted parameter "white list" through.
     def job_params
-      params.require(:job).permit(:job_client, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_actual_hours, :job_approved, :job_paid, :primary_id, :backup_id, :client_id)
+      params.require(:job).permit(:job_organization, :job_address, :job_date, :job_time, :job_estimated_hours, :job_sport, :job_notes, :job_completion_notes, :job_completed, :job_start_time, :job_end_time, :job_actual_hours, :job_approved, :job_paid, :primary_id, :backup_id, :organization_id)
     end
 
 end

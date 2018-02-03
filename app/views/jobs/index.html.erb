@@ -7,10 +7,10 @@
             <%= link_to "New Job", new_job_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
           </li>
           <li class="search-form">
-            Client:
+            Organization:
             <%= f.select(
-              :with_job_client_of,
-              @filterrific.select_options[:with_job_client_of],
+              :with_job_organization_of,
+              @filterrific.select_options[:with_job_organization_of],
               { include_blank: '- Any -' }
             ) %>&nbsp;&nbsp;
           </li>
