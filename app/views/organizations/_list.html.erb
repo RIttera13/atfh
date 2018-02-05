@@ -1,0 +1,97 @@
+<div class="fix-table">
+  <div id="filterrific_results">
+    <div id="exTab">
+      <ul class="nav nav-tabs">
+      	<li class="active">
+          <a  href="#1" data-toggle="tab">Active</a>
+      	</li>
+      	<li>
+          <a href="#2" data-toggle="tab">De-Activated</a>
+    		</li>
+      </ul>
+			<div class="tab-content">
+        </br>
+			  <div class="tab-pane active" id="1">
+          <div class="text-center scroll staffing-content">
+            <table class="table table-fixed table-bordered">
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :organization_name) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :organization_contact_name) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :organization_contact_email) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :organization_contact_phone) %></th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">De-Activate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @organizations.where(organization_active: true).each do |organization| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_name %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_name %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_email %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_phone %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= link_to "Edit", edit_organization_path(organization), {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success upgrade', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= link_to "De-Activate", organization_path(organization), method: :delete, class: 'btn btn-danger user-delete', data: { confirm: 'Are you sure you want to De-Activate this Organization?' } %></p>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="tab-pane" id="2">
+          <div class="text-center scroll staffing-content">
+            <table class="table table-fixed table-bordered">
+              <thead>
+                <tr class='staffing-list-header-font text-center'>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :name) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :contact_name) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :contact_email) %></th>
+                  <th class="text-center"><%= filterrific_sorting_link(@filterrific, :contact_phone) %></th>
+                  <th class="text-center">Edit</th>
+                  <th class="text-center">Re-Activate</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @organizations.where(organization_active: false).each do |organization| %>
+                  <tr>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_name %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_name %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_email %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= organization.organization_contact_phone %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= link_to "Edit", edit_organization_path(organization), {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success upgrade', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %></p>
+                    </td>
+                    <td class="col col-md-auto">
+                      <p class="text-center"><%= link_to "Re-Activate", re_activate_organization_path(organization),  method: :put, class: "btn btn-warning" %></p>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

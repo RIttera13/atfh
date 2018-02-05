@@ -2,7 +2,40 @@ class OrganizationsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @organizations = Organization.all
+    @filterrific = initialize_filterrific(
+      Organization,
+      params[:filterrific],
+      select_options: {
+      }
+    ) or return
+
+    @organizations = @filterrific.find.page(params[:page])
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  def show
+    @job = Job.find(params[:id])
+    @users = User.all
+    @start_date_time_auto = DateTime.new(@job.job_date.year, @job.job_date.month, @job.job_date.day, @job.job_time.to_time.hour, @job.job_time.to_time.min, @job.job_time.to_time.sec).strftime("%m/%d/%Y %l:%M %P")
+  end
+
+  def new
+    @organization = Organization.new
+  end
+
+  def create
+    @organization = Organization.new(organization_params)
+
+    if @organization.save
+      redirect_to organizations_path, success: 'Organization was successfully created.'
+    else
+      flash[:error] = @organization.errors.full_messages
+      redirect_to organizations_path
+    end
   end
 
   def edit
@@ -12,7 +45,7 @@ class OrganizationsController < ApplicationController
   def update
     @organization = Organization.find(params[:id])
 
-    if @organization.save
+    if @organization.update(organization_params)
       flash[:success] = "Organization updated."
       redirect_to organizations_path
     else
@@ -27,6 +60,14 @@ class OrganizationsController < ApplicationController
       flash[:notice] = "#{@organization.organization_name} was De-Activated succesfully."
       redirect_to organizations_path
     end
+  end
+
+  def re_activate
+    @organization = Organization.find(params[:id])
+
+    @organization.update(:organization_active => true)
+    flash[:success] = "Organization has been Re-Activated."
+    redirect_to organizations_path
   end
 
   private

@@ -10,9 +10,15 @@ Rails.application.routes.draw do
   devise_for :user
   resources :users, only: [:new, :create, :show, :index, :edit, :update, :profile, :destroy, :metrics]
 
-  resources :organizations, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+  resources :organizations, only: [:new, :create, :show, :index, :edit, :update, :destroy] do
+    member do
+       put :re_activate
+    end
+  end
 
   resources :sports, only: [:new, :create, :show, :index, :edit, :update, :destroy]
+
+  resources :locations, only: [:new, :create, :show, :index, :edit, :update, :destroy]
 
   get 'profile' => 'users#profile'
   get 'metrics' => 'users#metrics'

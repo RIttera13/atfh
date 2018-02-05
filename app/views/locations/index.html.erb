@@ -4,10 +4,10 @@
       <%= form_for_filterrific @filterrific do |f| %>
         <ul class="nav navbar-nav job-nav">
           <li>
-            <%= link_to "New Organization", new_organization_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
+            <%= link_to "New Location", new_location_path, {:remote => true, 'data-toggle' =>  "modal", class: 'btn btn-success new-btn', style: 'margin-right: 10px', 'data-target' => '#mymodal'} %>
           </li>
           <li class="search-form">
-            <%= f.label :search_by, "Search all Organizations:  " %>
+            <%= f.label :search_by, "Search all Locations:  " %>
             <%= f.text_field(
               :search_by,
               class: 'filterrific-periodically-observed'
@@ -22,8 +22,8 @@
       </div>
         <div>
           <%= render(
-            partial: 'organizations/list',
-            locals: { organizations: @organizations}
+            partial: 'locations/list',
+            locals: { locations: @locations}
           ) %>
         </div>
     </div>

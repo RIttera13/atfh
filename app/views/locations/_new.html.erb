@@ -1,0 +1,51 @@
+<div class="modal-body">
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+  <h1>New Location</h1>
+
+  <%= form_for @location do |f| %>
+    <% if @location.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@location.errors.count, "error") %> prohibited this location from being saved:</h2>
+
+        <ul>
+        <% @location.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    <div class="form-group">
+      <%= f.label :location_name, "Location Name:" %>&nbsp;&nbsp;
+      <%= f.text_field :location_name, required: true %>
+    </div>
+    </br>
+    <div class="location-address-info">
+      <p> Address: </p>
+      <div class="field">
+        <%= f.label :location_street, "Street:", style:"vertical-align: top" %>&nbsp;&nbsp;
+        <%= f.text_field :location_street, required: true %>
+      </div>
+      </br>
+      <div class="field">
+        <%= f.label :location_city, "City:" %>&nbsp;&nbsp;
+        <%= f.text_field :location_city, required: true %>
+      </div>
+      </br>
+      <div class="field">
+        <%= f.label :location_state, "State:" %>&nbsp;&nbsp;
+        <%= f.text_field :location_state, required: true %>
+      </div>
+      </br>
+      <div class="field">
+        <%= f.label :location_zip, "Zip:" %>&nbsp;&nbsp;
+        <%= f.text_field :location_zip, required: true %>
+      </div>
+      </br>
+    </div>
+    </br>
+    <div class="actions">
+      <%= f.submit class: "btn btn-success"%>
+    </div>
+  <% end %>
+</div>

@@ -5,7 +5,14 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |user|
+        csv << user.attributes.values_at(*column_names)
+      end
+    end
+  end
 
   has_many :primary, :class_name => 'Job', :foreign_key => 'primary_id'
   has_many :backup, :class_name => 'Job', :foreign_key => 'backup_id'
